@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react';
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 import { fetchMovieDetails } from 'API';
 import { Loader } from 'components/Loader/Loader';
-import { Container, List, ListInfo } from './MovieDetails.styled';
 import noImage from '../../components/noImage/noImage.png';
+import styles from './MovieDetails.module.css';
 
-export const MovieDetails = () => {
+const MovieDetails = () => {
   const { movieId } = useParams();
   const [movieInfo, setMovieInfo] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -63,17 +63,14 @@ export const MovieDetails = () => {
   return (
     <>
       <Link to={location.state?.from ?? '/'}>
-        <button
-          className="rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-          type="button"
-        >
+        <button className={styles.button} type="button">
           Go back
         </button>
       </Link>
 
-      <Container>
+      <div className={styles.container}>
         <img
-          width="300px"
+          className={styles.img}
           src={
             poster_path
               ? `https://image.tmdb.org/t/p/w500${poster_path}`
@@ -82,45 +79,46 @@ export const MovieDetails = () => {
           alt={original_title}
         />
         <div>
-          <h1 className="text-2xl pb-4 font-bold">
+          <h1 className={styles.title}>
             {title} ({release_date.slice(0, 4)})
           </h1>
-          <p className="pb-4">User score: {roundedPopularity}%</p>
-          <h2 className="text-2xl pb-4 font-bold">Overview</h2>
-          <p className="pb-4">{overview}</p>
-          <h2 className="text-2xl pb-4 font-bold">Genres</h2>
-          <List>
+          <p className={styles.score}>User score: {roundedPopularity}%</p>
+          <h2 className={styles.subTitle}>Overview</h2>
+          <p className={styles.overviewText}>{overview}</p>
+          <h2 className={styles.subTitle}>Genres</h2>
+          <ul className={styles.list}>
             {genres.map(genre => (
               <li className="pb-4" key={genre.id}>
                 {genre.name}
               </li>
             ))}
-          </List>
+          </ul>
 
           {companiesList[0] !== null && companiesList.length > 0 && (
             <>
-              <h2 className="text-2xl pb-4 font-bold">Production companies</h2>
-              <ul className="flex">{companiesList}</ul>
+              <h2 className={styles.subTitle}>Production companies</h2>
+              <ul className={styles.flex}>{companiesList}</ul>
             </>
           )}
         </div>
-      </Container>
+      </div>
 
       <hr />
 
       <div>
-        <h3 className="text-2xl pb-4 font-bold pt-4">Additional information</h3>
-        <ListInfo>
-          <li className="rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+        <h3 className={styles.subTitle}>Additional information</h3>
+        <ul className={styles.listInfo}>
+          <li className={styles.listLink}>
             <Link to="cast">Cast</Link>
           </li>
-          <li className="rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+          <li className={styles.listLink}>
             <Link to="reviews">Reviews</Link>
           </li>
-        </ListInfo>
+        </ul>
         <hr />
         <Outlet />
       </div>
     </>
   );
 };
+export default MovieDetails;

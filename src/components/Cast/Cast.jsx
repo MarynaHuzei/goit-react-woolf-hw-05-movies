@@ -3,9 +3,9 @@ import { useParams } from 'react-router-dom';
 import { fetchActors } from 'API';
 import { Loader } from 'components/Loader/Loader';
 import noImage from '../../components/noImage/noImage.png';
-import { List, Text } from "./cast.styled"
+import { List, Text, SubTitle } from './Cast.styled';
 
-export const Cast = () => {
+const Cast = () => {
   const { movieId } = useParams();
   const [actors, setActors] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -29,7 +29,8 @@ export const Cast = () => {
   return (
     <div>
       {loading && <Loader />}
-      <h2 className="text-2xl pb-4 font-bold pt-4">Movie Cast</h2>
+
+      <SubTitle>Movie Cast</SubTitle>
       <List>
         {actors.map(({ id, profile_path, original_name, name, character }) => (
           <li key={id}>
@@ -51,3 +52,4 @@ export const Cast = () => {
     </div>
   );
 };
+export default Cast;

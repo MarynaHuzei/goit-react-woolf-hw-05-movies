@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom';
-import { List, Item, MovieLink } from '../MovieList/MovieList.styled';
+import { List, Item, CustomNavLink } from '../MovieList/MovieList.styled';
 
 export const MovieList = ({ films }) => {
   const location = useLocation();
@@ -8,13 +8,13 @@ export const MovieList = ({ films }) => {
     <List>
       {films.map(film => (
         <Item key={film.id}>
-          <MovieLink
+          <CustomNavLink
             to={`/movies/${film.id}`}
             state={{ from: location }}
             cover={film.poster_path}
           >
             {film.title}
-          </MovieLink>
+          </CustomNavLink>
         </Item>
       ))}
     </List>

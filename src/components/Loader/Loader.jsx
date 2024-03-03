@@ -1,9 +1,9 @@
-import { Container, BallTriangle } from './Loader.styled';
+import { Container, LoaderS } from './Loader.styled';
 
 export const Loader = () => {
   return (
     <Container>
-      <BallTriangle></BallTriangle>
+      <LoaderS></LoaderS>
     </Container>
   );
 };

@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchReviews } from 'API';
 import { Loader } from 'components/Loader/Loader';
-import { List } from './Reviews.styled';
+import { List, Item, MovieReviews } from './Reviews.styled';
 
-export const Reviews = () => {
+const Reviews = () => {
   const { movieId } = useParams();
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -30,13 +30,13 @@ export const Reviews = () => {
       {loading && <Loader />}
       {reviews.length !== 0 ? (
         <div>
-          <h2 className="text-2xl pb-4 font-bold pt-4">Movie Reviews</h2>
+          <MovieReviews>Movie Reviews</MovieReviews>
           <List>
             {reviews.map(review => (
-              <li key={review.id}>
+              <Item key={review.id}>
                 <h2>Author: {review.author}</h2>
                 <p>{review.content}</p>
-              </li>
+              </Item>
             ))}
           </List>
         </div>
@@ -46,3 +46,4 @@ export const Reviews = () => {
     </>
   );
 };
+export default Reviews;
