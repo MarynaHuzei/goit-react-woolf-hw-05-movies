@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { fetchActors } from 'API';
 import { Loader } from 'components/Loader/Loader';
 import noImage from '../../components/noImage/noImage.png';
-import { List, Text, SubTitle } from "./Cast.styled"
+import { List, Text, SubTitle } from './cast.styled';
 const Cast = () => {
   const { movieId } = useParams();
   const [actors, setActors] = useState([]);
